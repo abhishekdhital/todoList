@@ -1,0 +1,18 @@
+<h1> MY TO DO LIST </h1 >
+
+<table>
+    <tr>                                     <!-- DEFINE A TABLE ROW                   -->
+        <th>Item</th>                         <!-- DEFINE A TABLE HEADER CELL         -->
+        <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>                                     <!-- DEFINE A TABLE DATA CELL                 -->
+        <td><a href="{% url 'task' task.id %}">View</a></td>
+    </tr>
+    {% empty %}
+
+        <h3> no items in list </h3>
+    {% endfor %}
+
+    </table>
