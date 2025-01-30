@@ -1,5 +1,19 @@
-<h1> MY TO DO LIST </h1 >
 
+
+{% if request.user.is_authenticated %}
+    <p> {{ request.user }} </p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+
+<hr>
+<h1> MY TO DO LIST </h1 >
+<a href="{% url 'task-create' %}">Add tasks</a>
 <table>
     <tr>                                     <!-- DEFINE A TABLE ROW                   -->
         <th>Item</th>                         <!-- DEFINE A TABLE HEADER CELL         -->
@@ -9,6 +23,9 @@
     <tr>
         <td>{{task.title}}</td>                                     <!-- DEFINE A TABLE DATA CELL                 -->
         <td><a href="{% url 'task' task.id %}">View</a></td>
+        <td><a href="{% url 'task-update' task.id %}">edit</a></td>
+        <td><a href="{% url 'task-delete' task.id %}">delete</a></td>
+
     </tr>
     {% empty %}
 
