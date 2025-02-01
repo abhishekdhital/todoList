@@ -1,4 +1,6 @@
+{% extends 'base/main.html' %}
 
+{%block content%}
 
 {% if request.user.is_authenticated %}
     <p> {{ request.user }} </p>
@@ -14,6 +16,13 @@
 <hr>
 <h1> MY TO DO LIST </h1 >
 <a href="{% url 'task-create' %}">Add tasks</a>
+
+<form method ="GET">
+    <input type='text' name='search-area' value="{{search_input}}">                  <!-- search button-->
+    <input type="submit" value='Search'>
+</form>
+
+
 <table>
     <tr>                                     <!-- DEFINE A TABLE ROW                   -->
         <th>Item</th>                         <!-- DEFINE A TABLE HEADER CELL         -->
@@ -22,7 +31,6 @@
     {% for task in tasks %}
     <tr>
         <td>{{task.title}}</td>                                     <!-- DEFINE A TABLE DATA CELL                 -->
-        <td><a href="{% url 'task' task.id %}">View</a></td>
         <td><a href="{% url 'task-update' task.id %}">edit</a></td>
         <td><a href="{% url 'task-delete' task.id %}">delete</a></td>
 
@@ -33,3 +41,6 @@
     {% endfor %}
 
     </table>
+
+{%endblock content%}
+
